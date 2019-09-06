@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Home</title>
-    <th:block th:include="header"/>
+    <th:block th:include="/partials/header"/>
 </head>
 <body>
-<th:block th:include="navbar"/>
+<th:block th:include="/partials/navbar"/>
 
 <main th:if="${number == null}">
     <h1>Guess a number:</h1>
@@ -26,6 +26,6 @@
 </div>
 
 
-<th:block th:include="footer"/>
+<th:block th:include="/partials/footer"/>
 </body>
 </html>
