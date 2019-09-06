@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Home</title>
+    <th:block th:include="header"/>
 </head>
 <body>
+<th:block th:include="navbar"/>
 
 <main th:if="${number == null}">
     <h1>Guess a number:</h1>
@@ -22,5 +24,8 @@
     <h1 th:if="${guess == number}">You guessed right!</h1>
     <h1 th:if="${guess != number}">You guessed wrong!</h1>
 </div>
+
+
+<th:block th:include="footer"/>
 </body>
 </html>
