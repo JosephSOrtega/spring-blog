@@ -1,42 +1,55 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
-    public String postsAll() {
-        return"<h1>Posts Index Page<h1>" +
-                "<h2>Here are all the posts:<h2>" +
-                "<ul>" +
-                "<li>1</li>" +
-                "<li>1</li>" +
-                "<li>1</li>" +
-                "</ul>";
+    public String postsAll(Model vmodel) {
+        List<Post> posts = new ArrayList<>();
+        Post postOne = new Post();
+        postOne.setBody("Apples are delicious");
+        postOne.setTitle("Apples!");
+
+        Post postTwo = new Post();
+        postTwo.setBody("Oranges are delicious");
+        postTwo.setTitle("Oranges!");
+
+        posts.add(postOne);
+        posts.add(postTwo);
+
+        vmodel.addAttribute("posts", posts);
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String postsAll(@PathVariable Long id) {
-        return "Here is Posts Page "+id;
+    public String postsAll(@PathVariable Long id, Model vmodel) {
+        vmodel.addAttribute("id", id);
+        Post postOne = new Post();
+        postOne.setId(id);
+        postOne.setBody("Apples are delicious");
+        postOne.setTitle("Apples!");
+        vmodel.addAttribute("post", postOne);
+
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String createPostForm() {
-        return "View the form for creating a post";
+        return "posts/show";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
     public String createPost() {
-        return "Create a new post";
+        return "posts/show";
     }
 
 }
