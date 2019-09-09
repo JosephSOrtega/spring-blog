@@ -5,6 +5,7 @@ import com.codeup.springblog.Repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -58,6 +59,24 @@ public class PostController {
 
         return "posts/show";
     }
+
+    @GetMapping("/posts/{id}/delete")
+    public String postsDelete(@PathVariable Long id) {
+        postDao.deleteById(id);
+        return "posts/show";
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public String postsEditForm(@PathVariable Long id, Model vModel) {
+
+        vModel.addAttribute("post", postDao.findOne(id));
+        return "posts/edit";
+    }
+    @PostMapping("/posts/edited")
+    public String postsEdited(@ModelAttribute Post post) {
+        return "posts/show";
+    }
+
 
     @GetMapping("/posts/create")
     public String createPostForm() {
