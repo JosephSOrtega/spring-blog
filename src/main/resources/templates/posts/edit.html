@@ -9,8 +9,8 @@
 <th:block th:include="/partials/navbar"/>
 
 <div>
-    <form action="#" th:action="@{/posts/edited}" th:object="${post}" method="post">
-        <p th:text="${post.id}"></p>
+    <form action="/posts/edited" th:object="${post}" method="post">
+        <p>Post: <input type="text" th:field="*{id}" /></p>
         <p>Post: <input type="text" th:field="*{title}" /></p>
         <p>Body: <input type="text" th:field="*{body}" /></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

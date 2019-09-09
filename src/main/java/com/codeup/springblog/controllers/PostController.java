@@ -2,6 +2,8 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.Models.Post;
 import com.codeup.springblog.Repos.PostRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Controller
@@ -60,20 +62,32 @@ public class PostController {
         return "posts/show";
     }
 
+//    @GetMapping("/posts/{id}/delete")
+//    public String postsDelete(@PathVariable Long id) {
+//        postDao.deletePostById(id);
+//        return "posts/show";
+//    }
+
     @GetMapping("/posts/{id}/delete")
     public String postsDelete(@PathVariable Long id) {
-        postDao.deleteById(id);
-        return "posts/show";
+        Post post = postDao.findOne(id);
+        postDao.delete(post.getId());
+        return "posts/delete";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String postsEditForm(@PathVariable Long id, Model vModel) {
-
         vModel.addAttribute("post", postDao.findOne(id));
         return "posts/edit";
     }
+
     @PostMapping("/posts/edited")
     public String postsEdited(@ModelAttribute Post post) {
+        Post newPost =  postDao.findOne(post.getId());
+        newPost.setTitle(post.getTitle());
+        newPost.setBody(post.getBody());
+        postDao.save(newPost);
+//        postDao.updatePost(newPost.getTitle(), newPost.getBody(), id);
         return "posts/show";
     }
 
