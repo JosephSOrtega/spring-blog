@@ -12,6 +12,7 @@
     <li th:each="post : ${posts}">
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.body}"></p>
+        <input type="hidden" name="id" th:value="${post.id}"/>
     </li>
 </ul>
 

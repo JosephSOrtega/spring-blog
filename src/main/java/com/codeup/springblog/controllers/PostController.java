@@ -22,29 +22,38 @@ public class PostController {
 
     @GetMapping("/posts")
     public String postsAll(Model vmodel) {
-        List<Post> posts = new ArrayList<>();
-        Post postOne = new Post();
-        postOne.setBody("Apples are delicious");
-        postOne.setTitle("Apples!");
+//        List<Post> posts = new ArrayList<>();
+        List<Post> posts;
 
-        Post postTwo = new Post();
-        postTwo.setBody("Oranges are delicious");
-        postTwo.setTitle("Oranges!");
+//        Post postOne = new Post();
+//        postOne.setId(1L);
+//        postOne.setBody("Apples are delicious");
+//        postOne.setTitle("Apples!");
+//
+//        Post postTwo = new Post();
+//        postOne.setId(2L);
+//        postTwo.setBody("Oranges are delicious");
+//        postTwo.setTitle("Oranges!");
 
-        posts.add(postOne);
-        posts.add(postTwo);
+
+//        posts.add(postOne);
+//        posts.add(postTwo);
+//
+
+        posts = (List<Post>) postDao.findAll();
 
         vmodel.addAttribute("posts", posts);
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    public String postsAll(@PathVariable Long id, Model vmodel) {
+    public String postsOne(@PathVariable Long id, Model vmodel) {
         vmodel.addAttribute("id", id);
-        Post postOne = new Post();
-        postOne.setId(id);
-        postOne.setBody("Apples are delicious");
-        postOne.setTitle("Apples!");
+        Post postOne;
+//        postOne.setId(1L);
+//        postOne.setBody("Apples are delicious");
+//        postOne.setTitle("Apples!");
+        postOne = postDao.findOne(id);
         vmodel.addAttribute("post", postOne);
 
         return "posts/show";
