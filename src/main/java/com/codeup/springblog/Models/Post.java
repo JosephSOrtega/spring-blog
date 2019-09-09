@@ -1,4 +1,4 @@
-package com.codeup.springblog.controllers;
+package com.codeup.springblog.Models;
 
 import com.sun.xml.internal.xsom.impl.scd.Step;
 import org.springframework.stereotype.Controller;
@@ -7,12 +7,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.xml.soap.Text;
+
+//@Controller
+@Entity (name = "Posts")
+public
 class Post {
 
+    @Id @GeneratedValue
     Long id;
+    @Column (nullable = false, length = 255)
     String title;
+    @Column (nullable = false, columnDefinition = "TEXT")
     String body;
+
+    public Post() {
+    }
+
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
 
     public Long getId() {
         return id;
