@@ -13,6 +13,15 @@
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.body}"></p>
         <input type="hidden" name="id" th:value="${post.id}"/>
+        <form action="/posts/editing" method="get">
+            <p><input type="submit" value="Edit" /></p>
+            <input type="hidden" name="id" th:value="${post.id}"/>
+        </form>
+        <form action="/posts/delete" method="post">
+            <p><input type="submit" value="Delete" /></p>
+            <input type="hidden" name="id" th:value="${post.id}"/>
+        </form>
+
     </li>
 </ul>
 

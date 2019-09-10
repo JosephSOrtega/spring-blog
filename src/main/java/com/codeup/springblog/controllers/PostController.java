@@ -68,18 +68,30 @@ public class PostController {
 //        return "posts/show";
 //    }
 
-    @GetMapping("/posts/{id}/delete")
-    public String postsDelete(@PathVariable Long id) {
-        Post post = postDao.findOne(id);
-        postDao.delete(post.getId());
+//    @GetMapping("/posts/{id}/delete")
+//    public String postsDelete(@PathVariable Long id) {
+//        Post post = postDao.findOne(id);
+//        postDao.delete(post.getId());
+//        return "posts/delete";
+//    }
+
+    @PostMapping("/posts/delete")
+    public String postsToBeDelete(@ModelAttribute Post post) {
+//        Post post = postDao.findOne(id);
+
+//        postDao.delete(post.getId());
+
+        Long delId = post.getId();
+        postDao.delete(delId);
+
         return "posts/delete";
     }
 
-    @GetMapping("/posts/{id}/edit")
-    public String postsEditForm(@PathVariable Long id, Model vModel) {
-        vModel.addAttribute("post", postDao.findOne(id));
-        return "posts/edit";
-    }
+//    @GetMapping("/posts/{id}/edit")
+//    public String postsEditForm(@PathVariable Long id, Model vModel) {
+//        vModel.addAttribute("post", postDao.findOne(id));
+//        return "posts/edit";
+//    }
 
     @PostMapping("/posts/edited")
     public String postsEdited(@ModelAttribute Post post) {
@@ -89,6 +101,18 @@ public class PostController {
         postDao.save(newPost);
 //        postDao.updatePost(newPost.getTitle(), newPost.getBody(), id);
         return "posts/show";
+    }
+    @GetMapping("/posts/editing")
+    public String postsToBeEdited(@ModelAttribute Post post, Model vModel) {
+//        Post newPost =  postDao.findOne(post.getId());
+//        newPost.setTitle(post.getTitle());
+//        newPost.setBody(post.getBody());
+//        postDao.save(newPost);
+//        postDao.updatePost(newPost.getTitle(), newPost.getBody(), id);
+        Long newId = post.getId();
+        vModel.addAttribute("post", postDao.findOne(newId));
+
+        return "posts/edit";
     }
 
 
