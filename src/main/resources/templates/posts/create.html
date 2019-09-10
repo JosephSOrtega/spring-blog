@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <th:block th:include="/partials/header"/>
+</head>
+<body>
+<th:block th:include="/partials/navbar"/>
+
+<div>
+<!--    <form th:action="@{'/posts/' + ${} +'create" method="post">-->
+        <form th:action="@{/posts/create}" th:method="post">
+        <p>Title: <input type="text" name="title"/></p>
+        <p>Body: <input type="text" name="body"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+    <form action="/posts" method="get">
+        <p><input type="submit" value="Home"/></p>
+    </form>
+
+</div>
+
+
+<th:block th:replace="/partials/footer"/>
+<!--<th:block th:include="/partials/footer"/>-->
+</body>
+</html>

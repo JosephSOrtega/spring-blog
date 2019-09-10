@@ -7,29 +7,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.soap.Text;
 
 //@Controller
-@Entity (name = "Posts")
-public
-class Post {
+@Entity
+@Table(name = "Posts")
+public class Post {
 
-    @Id @GeneratedValue
-    Long id;
-    @Column (nullable = false, length = 255)
-    String title;
-    @Column (nullable = false, columnDefinition = "TEXT")
-    String body;
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(nullable = false)
+    private String title;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String body;
 
+
+    // needs new instance
     public Post() {
     }
 
+    //    The R in CRUD, Constructors
     public Post(Long id, String title, String body) {
         this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
+    public Post(String title, String body) {
         this.title = title;
         this.body = body;
     }

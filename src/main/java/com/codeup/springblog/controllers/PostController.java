@@ -84,7 +84,9 @@ public class PostController {
         Long delId = post.getId();
         postDao.delete(delId);
 
-        return "posts/delete";
+//        return "posts/delete";
+        return "redirect:/posts";
+
     }
 
 //    @GetMapping("/posts/{id}/edit")
@@ -95,13 +97,14 @@ public class PostController {
 
     @PostMapping("/posts/edited")
     public String postsEdited(@ModelAttribute Post post) {
-        Post newPost =  postDao.findOne(post.getId());
+        Post newPost = postDao.findOne(post.getId());
         newPost.setTitle(post.getTitle());
         newPost.setBody(post.getBody());
         postDao.save(newPost);
 //        postDao.updatePost(newPost.getTitle(), newPost.getBody(), id);
         return "posts/show";
     }
+
     @GetMapping("/posts/editing")
     public String postsToBeEdited(@ModelAttribute Post post, Model vModel) {
 //        Post newPost =  postDao.findOne(post.getId());
@@ -118,11 +121,18 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String createPostForm() {
-        return "posts/show";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String createPost() {
+    public String createPost(@ModelAttribute Post post) {
+        Post newPost = new Post();
+        if (post != null) {
+            newPost.setTitle(post.getTitle());
+            newPost.setBody(post.getBody());
+            postDao.save(newPost);
+        }
+
         return "posts/show";
     }
 
