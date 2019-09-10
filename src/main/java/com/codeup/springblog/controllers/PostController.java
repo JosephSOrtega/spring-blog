@@ -97,13 +97,13 @@ public class PostController {
             newPost.setBody(post.getBody());
             newPost.setOwner(userDB);
 //            newPost.setImages(newImages);
-            postDao.save(post);
+            postDao.save(newPost);
 
             Post posted = postDao.findByTitle(post.getTitle());
 
-            postDao.insertNewImages(newImages, posted.getId());
-
-
+            for (AdImage img : newImages) {
+                postDao.insertNewImages(img.getPath(), posted.getId());
+            }
             for (PostCategory cats : newCat) {
                 postDao.insertNewCat(cats.getId(), posted.getId());
             }
@@ -114,3 +114,6 @@ public class PostController {
     }
 
 }
+
+
+//TODO: Add loop to pop tags -- after setting tags as an arrtib for create page -- Model form binding
