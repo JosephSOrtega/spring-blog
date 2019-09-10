@@ -133,7 +133,7 @@ public class PostController {
             postDao.save(newPost);
         }
 
-        return "posts/show";
+        return "redirect:/posts";
     }
 
 }
