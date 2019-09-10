@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.*;
 import javax.xml.soap.Text;
+import java.util.List;
 
 @Entity
 @Table(name = "Posts")
@@ -23,6 +24,8 @@ public class Post {
     private String body;
     @OneToOne
     private User owner;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<AdImage> images;
 
 
     // needs new instance
@@ -30,11 +33,12 @@ public class Post {
     }
 
     //    The R in CRUD, Constructors
-    public Post(Long id, String title, String body, User owner) {
+    public Post(Long id, String title, String body, User owner, List<AdImage> images) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.owner = owner;
+        this.images = images;
     }
 
     public Post(String title, String body) {
@@ -70,7 +74,16 @@ public class Post {
         return owner;
     }
 
+    public List<AdImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<AdImage> images) {
+        this.images = images;
+    }
+
     public void setOwner(User owner) {
         this.owner = owner;
+
     }
 }
