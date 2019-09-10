@@ -10,19 +10,18 @@
 
 <div>
     <form action="/posts/edited" th:object="${post}" method="post">
-<!--        <p>Id: <input type="text" th:field="*{id}" /></p>-->
+        <!--        <p>Id: <input type="text" th:field="*{id}" /></p>-->
         <div>Id: <p th:text="${post.id}"></p></div>
         <input type="hidden" name="id" th:value="${post.id}"/>
-        <p>Title: <input type="text" th:field="*{title}" /></p>
-        <p>Body: <input type="text" th:field="*{body}" /></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        <p>Title: <input type="text" th:field="*{title}"/></p>
+        <p>Body: <input type="text" th:field="*{body}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>
     <form action="/posts" method="get">
-        <p><input type="submit" value="Home" /></p>
+        <p><input type="submit" value="Home"/></p>
     </form>
 
 </div>
-
 
 
 <th:block th:include="/partials/footer"/>

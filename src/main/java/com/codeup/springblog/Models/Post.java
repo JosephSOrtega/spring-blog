@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.persistence.*;
 import javax.xml.soap.Text;
 
-//@Controller
 @Entity
 @Table(name = "Posts")
 public class Post {
@@ -22,6 +21,8 @@ public class Post {
     private String title;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
+    @OneToOne
+    private User owner;
 
 
     // needs new instance
@@ -29,10 +30,11 @@ public class Post {
     }
 
     //    The R in CRUD, Constructors
-    public Post(Long id, String title, String body) {
+    public Post(Long id, String title, String body, User owner) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.owner = owner;
     }
 
     public Post(String title, String body) {
@@ -64,5 +66,11 @@ public class Post {
         this.body = body;
     }
 
+    public User getOwner() {
+        return owner;
+    }
 
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 }
