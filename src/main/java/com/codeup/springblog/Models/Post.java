@@ -49,6 +49,13 @@ public class Post {
         this.categories = categories;
     }
 
+    public Post(String title, String body, User owner) {
+        this.title = title;
+        this.body = body;
+        this.owner = owner;
+    }
+
+
     public Post(String title, String body) {
         this.title = title;
         this.body = body;

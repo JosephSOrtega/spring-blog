@@ -1,6 +1,8 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.Models.AdImage;
 import com.codeup.springblog.Models.Post;
+import com.codeup.springblog.Models.PostCategory;
 import com.codeup.springblog.Models.User;
 import com.codeup.springblog.Repos.PostRepository;
 import com.codeup.springblog.Repos.UserRepository;
@@ -87,10 +89,25 @@ public class PostController {
 
         Post newPost = new Post();
         if (post != null) {
+            List<AdImage> newImages = post.getImages();
+            List<PostCategory> newCat = post.getCategories();
+
+
             newPost.setTitle(post.getTitle());
             newPost.setBody(post.getBody());
             newPost.setOwner(userDB);
-            postDao.save(newPost);
+//            newPost.setImages(newImages);
+            postDao.save(post);
+
+            Post posted = postDao.findByTitle(post.getTitle());
+
+            postDao.insertNewImages(newImages, posted.getId());
+
+
+            for (PostCategory cats : newCat) {
+                postDao.insertNewCat(cats.getId(), posted.getId());
+            }
+
         }
 
         return "redirect:/posts";

@@ -12,7 +12,13 @@
 <!--    <form th:action="@{'/posts/' + ${} +'create" method="post">-->
         <form th:action="@{/posts/create}" th:method="post">
         <p>Title: <input type="text" name="title"/></p>
-        <p>Body: <input type="text" name="body"/></p>
+            <p>Body: <input type="text" name="body"/></p>
+            <p>Image Link: <input type="text" name="images"/></p>
+            <p>Categories:
+            <p>Dogs <input type="checkbox" name="categories" th:value="1"/></p>
+            <p>Fruit <input type="checkbox" name="categories" th:value="2"/></p>
+            <p>Buy <input type="checkbox" name="categories" th:value="3"/></p>
+            </p>
         <p><input type="submit" value="Submit"/></p>
     </form>
     <form action="/posts" method="get">
