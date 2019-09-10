@@ -26,6 +26,13 @@ public class Post {
     private User owner;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<AdImage> images;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="posts_categories",
+            joinColumns={@JoinColumn(name="post_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
+    )
+    private List<PostCategory> categories;
 
 
     // needs new instance
@@ -33,12 +40,13 @@ public class Post {
     }
 
     //    The R in CRUD, Constructors
-    public Post(Long id, String title, String body, User owner, List<AdImage> images) {
+    public Post(Long id, String title, String body, User owner, List<AdImage> images, List<PostCategory> categories) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.owner = owner;
         this.images = images;
+        this.categories = categories;
     }
 
     public Post(String title, String body) {
@@ -85,5 +93,13 @@ public class Post {
     public void setOwner(User owner) {
         this.owner = owner;
 
+    }
+
+    public List<PostCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<PostCategory> categories) {
+        this.categories = categories;
     }
 }
