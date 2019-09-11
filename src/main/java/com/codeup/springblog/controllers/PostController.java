@@ -66,19 +66,55 @@ public class PostController {
 
     }
 
+    //    @PostMapping("/posts/edited")
+//    public String postsEdited(@ModelAttribute Post post) {
+//        Post newPost = postDao.findOne(post.getId());
+//        newPost.setTitle(post.getTitle());
+//        newPost.setBody(post.getBody());
+//        postDao.save(newPost);
+//        return "posts/show";
+//    }
     @PostMapping("/posts/edited")
-    public String postsEdited(@ModelAttribute Post post) {
-        Post newPost = postDao.findOne(post.getId());
-        newPost.setTitle(post.getTitle());
-        newPost.setBody(post.getBody());
+    public String postsEdited(
+            @RequestParam(name = "id") Long id,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body,
+            @RequestParam(name = "images") String images,
+            @RequestParam(name = "categories") List<PostCategory> categories
+    ) {
+
+        Post newPost = postDao.findOne(id);
+        newPost.setTitle(title);
+        newPost.setBody(body);
         postDao.save(newPost);
-        return "posts/show";
+        System.out.println("Post Added");
+        AdImage savedImg = new AdImage();
+
+        savedImg.setPath(images);
+        savedImg.setId(id);
+        imgDao.save(savedImg);
+        System.out.println("IMG Added");
+
+
+
+
+        for (PostCategory cat : categories) {
+            postDao.insertNewCat(cat.getId(), newPost.getId());
+        }
+        System.out.println("Cat Added");
+
+
+        return "redirect:/posts/" + newPost.getId();
     }
+
 
     @GetMapping("/posts/editing")
     public String postsToBeEdited(@ModelAttribute Post post, Model vModel) {
         Long newId = post.getId();
         vModel.addAttribute("post", postDao.findOne(newId));
+        vModel.addAttribute("categories", catDao.findAll());
+        vModel.addAttribute("images", imgDao.findOne(newId));
+
 
         return "posts/edit";
     }
