@@ -20,6 +20,7 @@ import java.util.List;
 public interface PostRepository extends CrudRepository<Post, Long> {
 //    Custom:
     Post findByTitle(String title);
+    List<PostCategory> findAllByCategories (List<PostCategory> postCategories);
 
     @Modifying
     @Query(value = "Insert into spring_adlister_db.ad_images (path, post_id) VALUES (?1, ?2);", nativeQuery = true)
@@ -30,6 +31,9 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     @Query(value = "Insert into spring_adlister_db.posts_categories (category_id, post_id) VALUES (?1, ?2);", nativeQuery = true)
     void insertNewCat(@Param("category_id") Long category_id, @Param("post_id") Long post_id);
 
+//    @Query(value = "Select * from spring_adlister_db.categories;", nativeQuery = true)
+//    List<PostCategory> allCategories();
+//
 
 }
 

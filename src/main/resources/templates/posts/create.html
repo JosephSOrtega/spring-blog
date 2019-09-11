@@ -10,35 +10,32 @@
 
 <div>
     <!--    <form th:action="@{'/posts/' + ${} +'create" method="post">-->
-    <form th:action="@{/posts/create}" th:method="post">
-        <p>Title: <input type="text" name="title"/></p>
-        <p>Body: <input type="text" name="body"/></p>
-        <p>Image Link: <input type="text" name="images"/></p>
-        <p>Categories:
-        <p>Dogs <input type="checkbox" name="categories" th:value="1"/></p>
-        <p>Fruit <input type="checkbox" name="categories" th:value="2"/></p>
-        <p>Buy <input type="checkbox" name="categories" th:value="3"/></p>
-        </p>
-        <p><input type="submit" value="Submit"/></p>
-    </form>
+    <!--    <form th:action="@{/posts/create}" th:method="post">-->
+    <!--        <p>Title: <input type="text" name="title"/></p>-->
+    <!--        <p>Body: <input type="text" name="body"/></p>-->
+    <!--        <p>Image Link: <input type="text" name="images"/></p>-->
+    <!--        <p>Categories:-->
+    <!--        <p>Dogs <input type="checkbox" name="categories" th:value="1"/></p>-->
+    <!--        <p>Fruit <input type="checkbox" name="categories" th:value="2"/></p>-->
+    <!--        <p>Buy <input type="checkbox" name="categories" th:value="3"/></p>-->
+    <!--        </p>-->
+    <!--        <p><input type="submit" value="Submit"/></p>-->
+    <!--    </form>-->
     <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
         Title:
-        <input th:field="*{title}" />
-        <br />
+        <input th:field="*{title}"/>
+        <br/>
         Body:
-        <input th:field="*{body}" />
-        <br />
+        <input th:field="*{body}"/>
+        <br/>
         Image Link:
         <input th:field="*{images}"/>
-        <br />
+        <br/>
         Categories:
-        Dogs <input th:type="checkbox" th:field="*{categories}" th:value="1"/>
-        Fruit <input th:type="checkbox" th:field="*{categories}" th:value="2"/>
-        Buy <input th:type="checkbox" th:field="*{categories}" th:value="3"/>
+        <input th:type="checkbox" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
 
-        <input type="submit" />
+        <input type="submit"/>
     </form>
-
     <form action="/posts" method="get">
         <p><input type="submit" value="Home"/></p>
     </form>

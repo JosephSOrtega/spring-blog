@@ -4,6 +4,7 @@ import com.codeup.springblog.Models.AdImage;
 import com.codeup.springblog.Models.Post;
 import com.codeup.springblog.Models.PostCategory;
 import com.codeup.springblog.Models.User;
+import com.codeup.springblog.Repos.CategoryRepository;
 import com.codeup.springblog.Repos.PostRepository;
 import com.codeup.springblog.Repos.UserRepository;
 import com.codeup.springblog.services.EmailService;
@@ -22,10 +23,12 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final CategoryRepository catDao;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository) {
+    public PostController(PostRepository postRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
         this.postDao = postRepository;
         this.userDao = userRepository;
+        this.catDao = categoryRepository;
     }
 
     @Autowired
@@ -79,20 +82,36 @@ public class PostController {
 
 
     @GetMapping("/posts/create")
-    public String createPostForm() {
+    public String createPostForm(Model model) {
+        model.addAttribute("post", new Post());
+        model.addAttribute("categories", catDao.findAll());
+
         return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String createPost( @ModelAttribute Post paddedin
-//            @RequestParam(name = "title") String title,
-//            @RequestParam(name = "body") String body,
-//            @RequestParam(name = "images") AdImage images,
-//            @RequestParam(name = "categories") Long categories
-    ) {
-    paddedin.setOwner( userDao.findOne(1L));
-    Post savdPost = postDao.save(paddedin);
-    emailService.prepareAndSend(savdPost, "Post Created", String.format("Post with id %s has been created.", savdPost.getId()));
+    public String createPost(@ModelAttribute Post addedIn) {
+        addedIn.setOwner(userDao.findOne(1L));
+
+        Post savedPost = new Post();
+        List<AdImage> savedImg = addedIn.getImages();
+
+        savedPost.setOwner(userDao.findOne(1L));
+        savedPost.setTitle(addedIn.getTitle());
+        savedPost.setBody(addedIn.getBody());
+
+        postDao.save(savedPost);
+
+        for (AdImage img: savedImg) {
+            postDao.insertNewImages(img.getPath(), savedPost.getId());
+        }
+
+        for (PostCategory cat: addedIn.getCategories()) {
+            postDao.insertNewCat(cat.getId(), savedPost.getId());
+        }
+
+
+        emailService.prepareAndSend(savedPost, "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
 //        User userDB = userDao.findOne(1L);
 //        Post newPost = new Post();
 //        AdImage image = new AdImage();
@@ -118,7 +137,7 @@ public class PostController {
 //            for (PostCategory cats : newCat) {
 //                postDao.insertNewCat(cats.getId(), posted.getId());
 //            }
-        return "redirect:/posts/" + savdPost.getId();
+        return "redirect:/posts/" + savedPost.getId();
     }
 
 }

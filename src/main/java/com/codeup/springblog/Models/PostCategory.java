@@ -25,6 +25,10 @@ public class PostCategory {
         this.name = name;
         this.post = post;
     }
+    public PostCategory(int num, String post) {
+        this.id = num;
+        this.name = post;
+    }
 
     public long getId() {
         return id;
