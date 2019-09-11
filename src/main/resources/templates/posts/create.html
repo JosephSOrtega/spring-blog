@@ -29,10 +29,10 @@
         <input th:field="*{body}"/>
         <br/>
         Image Link:
-        <input th:field="*{images}"/>
+        <input th:field="*{images}" />
         <br/>
         Categories:
-        <input th:type="checkbox" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
+        <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
 
         <input type="submit"/>
     </form>

@@ -150,11 +150,12 @@ public class PostController {
     public String createPost(
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body,
-            @RequestParam(name = "images") List<AdImage> images,
+            @RequestParam(name = "images") String images,
             @RequestParam(name = "categories") List<PostCategory> categories
-            ) {
+    ) {
 
         Post savedPost = new Post();
+        AdImage savedImg = new AdImage();
         savedPost.setOwner(userDao.findOne(1L));
         savedPost.setTitle(title);
         savedPost.setBody(body);
@@ -163,9 +164,12 @@ public class PostController {
 
         System.out.println("Post Added");
 
-        for (AdImage img: images) {
-            imgDao.insertNewImages(img.getPath(), savedPost.getId());
-        }
+//        for (String img: images) {
+
+        savedImg.setPath(images);
+        savedImg.setId(savedPost.getId());
+        imgDao.save(savedImg);
+//        }
         System.out.println("IMG Added");
 
         for (PostCategory cat : categories) {
