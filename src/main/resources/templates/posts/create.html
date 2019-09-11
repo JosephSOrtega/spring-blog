@@ -21,6 +21,24 @@
         </p>
         <p><input type="submit" value="Submit"/></p>
     </form>
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        Title:
+        <input th:field="*{title}" />
+        <br />
+        Body:
+        <input th:field="*{body}" />
+        <br />
+        Image Link:
+        <input th:field="*{images}"/>
+        <br />
+        Categories:
+        Dogs <input th:type="checkbox" th:field="*{categories}" th:value="1"/>
+        Fruit <input th:type="checkbox" th:field="*{categories}" th:value="2"/>
+        Buy <input th:type="checkbox" th:field="*{categories}" th:value="3"/>
+
+        <input type="submit" />
+    </form>
+
     <form action="/posts" method="get">
         <p><input type="submit" value="Home"/></p>
     </form>

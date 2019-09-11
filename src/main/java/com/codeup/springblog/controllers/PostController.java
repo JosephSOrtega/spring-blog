@@ -6,14 +6,13 @@ import com.codeup.springblog.Models.PostCategory;
 import com.codeup.springblog.Models.User;
 import com.codeup.springblog.Repos.PostRepository;
 import com.codeup.springblog.Repos.UserRepository;
+import com.codeup.springblog.services.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -28,6 +27,10 @@ public class PostController {
         this.postDao = postRepository;
         this.userDao = userRepository;
     }
+
+    @Autowired
+    private EmailService emailService;
+
 
     @GetMapping("/posts")
     public String postsAll(Model vmodel) {
@@ -81,36 +84,41 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post) {
-
-//hardcoded for now
-        User userDB = userDao.findOne(1L);
-
-
-        Post newPost = new Post();
-        if (post != null) {
-            List<AdImage> newImages = post.getImages();
-            List<PostCategory> newCat = post.getCategories();
-
-
-            newPost.setTitle(post.getTitle());
-            newPost.setBody(post.getBody());
-            newPost.setOwner(userDB);
-//            newPost.setImages(newImages);
-            postDao.save(newPost);
-
-            Post posted = postDao.findByTitle(post.getTitle());
-
-            for (AdImage img : newImages) {
-                postDao.insertNewImages(img.getPath(), posted.getId());
-            }
-            for (PostCategory cats : newCat) {
-                postDao.insertNewCat(cats.getId(), posted.getId());
-            }
-
-        }
-
-        return "redirect:/posts";
+    public String createPost( @ModelAttribute Post paddedin
+//            @RequestParam(name = "title") String title,
+//            @RequestParam(name = "body") String body,
+//            @RequestParam(name = "images") AdImage images,
+//            @RequestParam(name = "categories") Long categories
+    ) {
+    paddedin.setOwner( userDao.findOne(1L));
+    Post savdPost = postDao.save(paddedin);
+    emailService.prepareAndSend(savdPost, "Post Created", String.format("Post with id %s has been created.", savdPost.getId()));
+//        User userDB = userDao.findOne(1L);
+//        Post newPost = new Post();
+//        AdImage image = new AdImage();
+//        PostCategory postCat = new PostCategory();
+//        newPost.setTitle(title);
+//        newPost.setBody(body);
+//        postDao.save(newPost);
+//            List<AdImage> newImages = post.getImages();
+//            List<PostCategory> newCat = post.getCategories();
+//
+//
+//            newPost.setTitle(post.getTitle());
+//            newPost.setBody(post.getBody());
+//            newPost.setOwner(userDB);
+////            newPost.setImages(newImages);
+//            postDao.save(newPost);
+//
+//            Post posted = postDao.findByTitle(post.getTitle());
+//
+//            for (AdImage img : newImages) {
+//                postDao.insertNewImages(img.getPath(), posted.getId());
+//            }
+//            for (PostCategory cats : newCat) {
+//                postDao.insertNewCat(cats.getId(), posted.getId());
+//            }
+        return "redirect:/posts/" + savdPost.getId();
     }
 
 }
