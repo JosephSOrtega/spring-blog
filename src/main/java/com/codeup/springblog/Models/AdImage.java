@@ -25,6 +25,13 @@ public class AdImage {
         this.path = path;
         this.post = post;
     }
+    public AdImage(String path, long id) {
+        this.path = path;
+        this.id = id;
+    }
+    public AdImage(String path) {
+        this.path = path;
+    }
 
 
     public long getId() {

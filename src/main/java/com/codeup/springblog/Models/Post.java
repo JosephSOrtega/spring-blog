@@ -24,8 +24,12 @@ public class Post {
     private String body;
     @OneToOne
     private User owner;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+//    private List<AdImage> images;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<AdImage> images;
+    private String images;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="posts_categories",
@@ -40,7 +44,15 @@ public class Post {
     }
 
     //    The R in CRUD, Constructors
-    public Post(Long id, String title, String body, User owner, List<AdImage> images, List<PostCategory> categories) {
+//    public Post(Long id, String title, String body, User owner, List<AdImage> images, List<PostCategory> categories) {
+//        this.id = id;
+//        this.title = title;
+//        this.body = body;
+//        this.owner = owner;
+//        this.images = images;
+//        this.categories = categories;
+//    }
+    public Post(Long id, String title, String body, User owner, String images, List<PostCategory> categories) {
         this.id = id;
         this.title = title;
         this.body = body;
