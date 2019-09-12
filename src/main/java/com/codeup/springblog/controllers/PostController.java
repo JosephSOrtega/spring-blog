@@ -37,10 +37,6 @@ public class PostController {
         this.imgDao = imageRepository;
         this.emailService = emailService;
     }
-//
-//    @Autowired
-//    private EmailService emailService;
-
 
     @GetMapping("/posts")
     public String postsAll(Model vmodel) {
@@ -150,13 +146,14 @@ public class PostController {
 
         System.out.println("Post Added");
 
-//        savedImg.setPath(images);
-//        savedImg.setPost(postDao.findByTitle(title));
-//        imgDao.save(savedImg);
+        savedImg.setPath(images);
+        System.out.println("images added");
+        savedImg.setPost(postDao.findByTitle(title));
+        System.out.println("post added");
+        imgDao.save(savedImg);
+        System.out.println("IMG saved");
 
-        imgDao.save(images, postDao.findByTitle(title).getId());
 
-        System.out.println("IMG Added");
 
         for (PostCategory cat : categories) {
             postDao.insertNewCat(cat.getId(), savedPost.getId());
@@ -164,11 +161,13 @@ public class PostController {
         System.out.println("Cat Added");
 
         emailService.prepareAndSend(postDao.findByTitle(savedPost.getTitle()), "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
+        imgDao.saveNewImage(images, postDao.findByTitle(title).getId());
 
-        return "redirect:/posts";
+        System.out.println("IMG id added");
+        return "redirect:/posts/" + savedPost.getId();
     }
 
 }
 
 
-//TODO: Add loop to pop tags -- after setting tags as an arrtib for create page -- Model form binding
+//TODO: fix delete, duplicate titles are my bane because I cant pull the right id to add to images

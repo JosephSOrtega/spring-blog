@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
 //    Custom:
-    Post findByTitle(String title);
+Post findByTitle(String title);
 //    List<PostCategory> findAllByCategories (List<PostCategory> postCategories);
 
 
