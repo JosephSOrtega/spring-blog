@@ -12,8 +12,8 @@
     <h2 th:text="${post.id}"></h2>
     <h2 th:text="${post.title}"></h2>
     <p th:text="${post.body}"></p>
-    <p th:each="cat : ${post.categories}" th:text="${cat.getName()}" alt="pics" ></p>
-    <img th:each="img : ${post.images}" th:src="${img.path}" alt="pics" />
+    <p th:each="cat : ${post.categories}" th:text="${cat.getName()}" alt="categories" ></p>
+    <img th:each="img : ${post.getImages()}" th:src="${img.getPath()}" alt="pics" />
     <form action="/posts" method="get">
         <p><input type="submit" value="home"/></p>
     </form>

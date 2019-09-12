@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,21 +27,24 @@ public class PostController {
     private final UserRepository userDao;
     private final CategoryRepository catDao;
     private final ImageRepository imgDao;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository, CategoryRepository categoryRepository, ImageRepository imageRepository) {
+
+    public PostController(PostRepository postRepository, UserRepository userRepository, CategoryRepository categoryRepository, ImageRepository imageRepository, EmailService emailService) {
         this.postDao = postRepository;
         this.userDao = userRepository;
         this.catDao = categoryRepository;
         this.imgDao = imageRepository;
+        this.emailService = emailService;
     }
-
-    @Autowired
-    private EmailService emailService;
+//
+//    @Autowired
+//    private EmailService emailService;
 
 
     @GetMapping("/posts")
     public String postsAll(Model vmodel) {
-        List<Post> posts;
+        List<Post> posts = null;
 
         posts = (List<Post>) postDao.findAll();
 
@@ -146,9 +150,12 @@ public class PostController {
 
         System.out.println("Post Added");
 
-        savedImg.setPath(images);
-        savedImg.setId(savedPost.getId());
-        imgDao.save(savedImg);
+//        savedImg.setPath(images);
+//        savedImg.setPost(postDao.findByTitle(title));
+//        imgDao.save(savedImg);
+
+        imgDao.save(images, postDao.findByTitle(title).getId());
+
         System.out.println("IMG Added");
 
         for (PostCategory cat : categories) {
@@ -158,7 +165,7 @@ public class PostController {
 
         emailService.prepareAndSend(postDao.findByTitle(savedPost.getTitle()), "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
 
-        return "redirect:/posts/" + savedPost.getId();
+        return "redirect:/posts";
     }
 
 }
