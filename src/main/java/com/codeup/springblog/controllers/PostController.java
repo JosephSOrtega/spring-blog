@@ -128,60 +128,6 @@ public class PostController {
         return "posts/create";
     }
 
-//    @PostMapping("/posts/create")
-//    public String createPost(@ModelAttribute Post addedIn) {
-//        addedIn.setOwner(userDao.findOne(1L));
-//
-//        Post savedPost = new Post();
-////        List<AdImage> savedImg = addedIn.getImages();
-//
-//        savedPost.setOwner(userDao.findOne(1L));
-//        savedPost.setTitle(addedIn.getTitle());
-//        savedPost.setBody(addedIn.getBody());
-//
-//        postDao.save(savedPost);
-//
-//        System.out.println("Post Added");
-//
-////        for (AdImage img: savedImg) {
-////            imgDao.save(img.getPath(), savedPost.getId());
-////        }
-////        System.out.println("IMG Added");
-//
-//        for (PostCategory cat: addedIn.getCategories()) {
-//            postDao.insertNewCat(cat.getId(), savedPost.getId());
-//        }
-//        System.out.println("Cat Added");
-//
-////        emailService.prepareAndSend(postDao.findByTitle(savedPost.getTitle()), "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
-////        User userDB = userDao.findOne(1L);
-////        Post newPost = new Post();
-////        AdImage image = new AdImage();
-////        PostCategory postCat = new PostCategory();
-////        newPost.setTitle(title);
-////        newPost.setBody(body);
-////        postDao.save(newPost);
-////            List<AdImage> newImages = post.getImages();
-////            List<PostCategory> newCat = post.getCategories();
-////
-////
-////            newPost.setTitle(post.getTitle());
-////            newPost.setBody(post.getBody());
-////            newPost.setOwner(userDB);
-//////            newPost.setImages(newImages);
-////            postDao.save(newPost);
-////
-////            Post posted = postDao.findByTitle(post.getTitle());
-////
-////            for (AdImage img : newImages) {
-////                postDao.insertNewImages(img.getPath(), posted.getId());
-////            }
-////            for (PostCategory cats : newCat) {
-////                postDao.insertNewCat(cats.getId(), posted.getId());
-////            }
-//        return "redirect:/posts/" + savedPost.getId();
-//    }
-
     @PostMapping("/posts/create")
     public String createPost(
             @RequestParam(name = "title") String title,
@@ -200,12 +146,9 @@ public class PostController {
 
         System.out.println("Post Added");
 
-//        for (String img: images) {
-
         savedImg.setPath(images);
         savedImg.setId(savedPost.getId());
         imgDao.save(savedImg);
-//        }
         System.out.println("IMG Added");
 
         for (PostCategory cat : categories) {
@@ -213,32 +156,8 @@ public class PostController {
         }
         System.out.println("Cat Added");
 
-//        emailService.prepareAndSend(postDao.findByTitle(savedPost.getTitle()), "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
-//        User userDB = userDao.findOne(1L);
-//        Post newPost = new Post();
-//        AdImage image = new AdImage();
-//        PostCategory postCat = new PostCategory();
-//        newPost.setTitle(title);
-//        newPost.setBody(body);
-//        postDao.save(newPost);
-//            List<AdImage> newImages = post.getImages();
-//            List<PostCategory> newCat = post.getCategories();
-//
-//
-//            newPost.setTitle(post.getTitle());
-//            newPost.setBody(post.getBody());
-//            newPost.setOwner(userDB);
-////            newPost.setImages(newImages);
-//            postDao.save(newPost);
-//
-//            Post posted = postDao.findByTitle(post.getTitle());
-//
-//            for (AdImage img : newImages) {
-//                postDao.insertNewImages(img.getPath(), posted.getId());
-//            }
-//            for (PostCategory cats : newCat) {
-//                postDao.insertNewCat(cats.getId(), posted.getId());
-//            }
+        emailService.prepareAndSend(postDao.findByTitle(savedPost.getTitle()), "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
+
         return "redirect:/posts/" + savedPost.getId();
     }
 
