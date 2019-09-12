@@ -28,6 +28,6 @@ public interface ImageRepository extends JpaRepository<AdImage, Long> {
     @Query(value = "update spring_adlister_db.ad_images a set a.path = ? where a.post_id = ?", nativeQuery = true)
     void saveNewImage(String path, Long id);
 
-    AdImage findAdImageByPath(String path);
+    AdImage findAdImageByPost(Long post_id);
 //    void saveNewImage(String path, Long id);
 }

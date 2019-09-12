@@ -48,12 +48,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/posts") // anyone can see the home and the ads pages
                 .permitAll()
-                /* Pages that require athentication */
+                /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
                         "/posts/create", // only authenticated users can create ads
-                        "/posts/{id}/edit" // only authenticated users can edit ads
+                        "/posts/{id}/edit", // only authenticated users can edit ads
+                        "/posts/delete" // only authenticated users can delete ads
                 )
                 .authenticated()
         ;

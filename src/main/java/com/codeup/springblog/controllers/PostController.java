@@ -61,6 +61,8 @@ public class PostController {
     @PostMapping("/posts/delete")
     public String postsToBeDelete(@ModelAttribute Post post) {
         Long delId = post.getId();
+        imgDao.delete(imgDao.findAdImageByPost(delId));
+        catDao.deletePostCategoriesById(delId);
         postDao.delete(delId);
         return "redirect:/posts";
 
