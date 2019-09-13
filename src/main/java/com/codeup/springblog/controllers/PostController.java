@@ -91,7 +91,7 @@ public class PostController {
             @RequestParam(name = "id") Long id,
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body,
-            @RequestParam(name = "images") String images,
+            @RequestParam(name = "path") String images,
             @RequestParam(name = "categories") List<PostCategory> categories
     ) {
 
@@ -100,16 +100,16 @@ public class PostController {
         newPost.setBody(body);
         postDao.save(newPost);
         System.out.println("Post Added");
-        AdImage savedImg = new AdImage();
-
-        savedImg.setPath(images);
-        savedImg.setId(id);
-        imgDao.save(savedImg);
+//        AdImage savedImg = new AdImage();
+//
+//        savedImg.setPath(images);
+//        savedImg.setId(id);
+        imgDao.modifyImg(images, id);
         System.out.println("IMG Added");
 
 
 
-
+        imgDao.deleteByPost_Id(id);
         for (PostCategory cat : categories) {
             postDao.insertNewCat(cat.getId(), newPost.getId());
         }

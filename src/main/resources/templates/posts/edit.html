@@ -10,8 +10,8 @@
 
 <div>
     <form th:action="@{/posts/edited}" th:method="post" th:object="${post}">
-        Id:
-        <p th:text="*{id}"></p>
+        Id:<p th:text="*{id}"></p>
+        <input type="hidden" name="id" th:value="${post.id}"/>
         Title:
         <input th:field="*{title}"/>
         <br/>
@@ -19,11 +19,10 @@
         <input th:field="*{body}"/>
         <br/>
         Image Link:
-        <input th:object="${images}" th:field="*{path}" />
+        <input th:name="images" th:object="${images}" th:field="*{path}" />
         <br/>
         Categories:
         <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
-
         <input type="submit"/>
     </form>
 </div>
