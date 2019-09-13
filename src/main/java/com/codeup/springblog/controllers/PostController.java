@@ -58,11 +58,20 @@ public class PostController {
         return "posts/show";
     }
 
-    @PostMapping("/posts/delete")
-    public String postsToBeDelete(@ModelAttribute Post post) {
-        Long delId = post.getId();
-        imgDao.delete(imgDao.findAdImageByPost(delId));
-        catDao.deletePostCategoriesById(delId);
+//    @PostMapping("/posts/delete")
+//    public String postsToBeDelete(
+//            @ModelAttribute Post post
+//    ) {
+        @PostMapping("/posts/delete")
+        public String postsToBeDelete(
+                @RequestParam(name = "id") Long id
+    ) {
+            System.out.println(id);
+            Long delId = id;
+        imgDao.deleteByPost_Id(delId);
+        System.out.println("img del");
+        catDao.deletePostCategoryBy(delId);
+        System.out.println("img cat");
         postDao.delete(delId);
         return "redirect:/posts";
 

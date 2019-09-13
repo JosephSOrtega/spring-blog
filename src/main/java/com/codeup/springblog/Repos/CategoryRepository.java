@@ -12,6 +12,6 @@ public interface CategoryRepository extends JpaRepository<PostCategory, Long> {
 //    @Transactional
 //    @Modifying
 //    @Query(value = "delete from spring_adlister_db.ad_images a where a.post_id = ?", nativeQuery = true)
-    void deletePostCategoriesById(Long id);
+    void deletePostCategoryBy(Long id);
 
 }
