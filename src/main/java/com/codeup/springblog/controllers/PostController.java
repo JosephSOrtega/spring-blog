@@ -168,9 +168,10 @@ public class PostController {
 //        System.out.println("post added");
 //        System.out.println("images added");
         System.out.println(savedPost.getId());
-        imgDao.save(savedImg);
-        postDao.modifyImg(images, savedPost.getId());
+        imgDao.saveNewImage(images, savedPost.getId());
         System.out.println("IMG saved");
+        imgDao.modifyImg(images, savedPost.getId());
+        System.out.println("IMG edited");
 
 
 

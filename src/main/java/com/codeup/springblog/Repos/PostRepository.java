@@ -31,9 +31,10 @@ Post findByTitle(String title);
     void insertNewCat(@Param("category_id") Long category_id, @Param("post_id") Long post_id);
 
     @Modifying
-    @Query(value = "update spring_adlister_db.ad_images a set a.path = :pathHere where a.post_id = :post_id", nativeQuery = true)
+    @Query(value = "Insert into spring_adlister_db.ad_images (path) VALUES (:pathHere);", nativeQuery = true)
     @Transactional
-    void modifyImg(@Param("pathHere") String path, @Param("post_id") Long post_id);
+    void insertNewImg (@Param("pathHere") String path);
+
 
 
     @Modifying

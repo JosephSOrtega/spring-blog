@@ -26,9 +26,15 @@ public interface ImageRepository extends JpaRepository<AdImage, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "update spring_adlister_db.ad_images a set a.path = ?1 where a.post_id = ?2", nativeQuery = true)
+    @Query(value = "insert into spring_adlister_db.ad_images (path, post_id) values (?1, ?2);", nativeQuery = true)
     void saveNewImage(String path, Long post_id);
 //
+
+    @Modifying
+    @Query(value = "update spring_adlister_db.ad_images a set a.path = ?1 where a.post_id = ?2", nativeQuery = true)
+    @Transactional
+    void modifyImg( String path, Long post_id);
+
     @Transactional
     @Modifying
     @Query(value = "delete from spring_adlister_db.ad_images  where post_id = ?1", nativeQuery = true)
