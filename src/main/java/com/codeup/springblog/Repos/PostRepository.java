@@ -30,6 +30,16 @@ Post findByTitle(String title);
     @Transactional
     void insertNewCat(@Param("category_id") Long category_id, @Param("post_id") Long post_id);
 
+    @Modifying
+    @Query(value = "update spring_adlister_db.ad_images a set a.path = :pathHere where a.post_id = :post_id", nativeQuery = true)
+    @Transactional
+    void modifyImg(@Param("pathHere") String path, @Param("post_id") Long post_id);
+
+
+    @Modifying
+    @Query(value = "insert into spring_adlister_db.ad_images (path, post_id) VALUES (:pathHere, :post_id);", nativeQuery = true)
+    void saveImage(@Param("pathHere") String path, @Param("post_id") Long post_id);
+
 //    @Query(value = "Select * from spring_adlister_db.categories;", nativeQuery = true)
 //    List<PostCategory> allCategories();
 //

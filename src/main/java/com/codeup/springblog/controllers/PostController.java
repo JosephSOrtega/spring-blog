@@ -12,6 +12,7 @@ import com.codeup.springblog.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -149,7 +150,11 @@ public class PostController {
 
         Post savedPost = new Post();
         AdImage savedImg = new AdImage();
-        savedPost.setOwner(userDao.findOne(1L));
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User userDB = userDao.findOne(userSession.getId());
+
+        savedPost.setOwner(userDB);
         savedPost.setTitle(title);
         savedPost.setBody(body);
 
@@ -160,8 +165,11 @@ public class PostController {
         savedImg.setPath(images);
         System.out.println("images added");
         savedImg.setPost(postDao.findByTitle(title));
-        System.out.println("post added");
+//        System.out.println("post added");
+//        System.out.println("images added");
+        System.out.println(savedPost.getId());
         imgDao.save(savedImg);
+        postDao.modifyImg(images, savedPost.getId());
         System.out.println("IMG saved");
 
 
@@ -172,7 +180,7 @@ public class PostController {
         System.out.println("Cat Added");
 
         emailService.prepareAndSend(postDao.findByTitle(savedPost.getTitle()), "Post Created", String.format("Post with id %s has been created.", savedPost.getId()));
-        imgDao.saveNewImage(images, postDao.findByTitle(title).getId());
+//        imgDao.saveNewImage(images, savedPost.getId());
 
         System.out.println("IMG id added");
         return "redirect:/posts/" + savedPost.getId();

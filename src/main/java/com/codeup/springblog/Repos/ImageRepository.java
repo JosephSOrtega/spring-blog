@@ -17,20 +17,23 @@ import java.sql.ResultSet;
 @Repository
 public interface ImageRepository extends JpaRepository<AdImage, Long> {
 
-//    @Modifying
+    //    @Modifying
 //    @Query(value = "update spring_adlister_db.ad_images set post_id = ?1 where id = ?2", nativeQuery = true)
 //    void insertNewImages(@Param("post_id") Long post_id, @Param("id") Long id);
 //    @Modifying
 //    @Query(value = "insert into spring_adlister_db.ad_images (path, post_id) select (:pathHere, :path_id)", nativeQuery = true)
 
+
     @Transactional
     @Modifying
-    @Query(value = "update spring_adlister_db.ad_images a set a.path = ? where a.post_id = ?", nativeQuery = true)
-    void saveNewImage(String path, Long id);
+    @Query(value = "update spring_adlister_db.ad_images a set a.path = ?1 where a.post_id = ?2", nativeQuery = true)
+    void saveNewImage(String path, Long post_id);
+//
     @Transactional
     @Modifying
     @Query(value = "delete from spring_adlister_db.ad_images  where post_id = ?1", nativeQuery = true)
-    void deleteByPost_Id (Long id);
+    void deleteByPost_Id(Long id);
+
     AdImage findAdImageByPost(Long post_id);
 //    void saveNewImage(String path, Long id);
 }
