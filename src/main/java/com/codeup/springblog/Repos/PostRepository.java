@@ -35,6 +35,9 @@ Post findByTitle(String title);
     @Transactional
     void insertNewImg (@Param("pathHere") String path);
 
+    @Query(value = "SELECT path from spring_adlister_db.ad_images where post_id = :post_id;", nativeQuery = true)
+    String findPathByPost_Id (Long post_id);
+
 
 
     @Modifying

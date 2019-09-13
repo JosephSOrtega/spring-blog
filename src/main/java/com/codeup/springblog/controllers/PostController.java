@@ -123,9 +123,11 @@ public class PostController {
     @GetMapping("/posts/editing")
     public String postsToBeEdited(@ModelAttribute Post post, Model vModel) {
         Long newId = post.getId();
+        AdImage path = imgDao.findPath(newId);
+        System.out.println(path.getPath());
         vModel.addAttribute("post", postDao.findOne(newId));
         vModel.addAttribute("categories", catDao.findAll());
-        vModel.addAttribute("images", imgDao.findOne(newId));
+        vModel.addAttribute("images", path);
 
 
         return "posts/edit";

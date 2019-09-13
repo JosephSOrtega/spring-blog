@@ -9,17 +9,6 @@
 <th:block th:include="/partials/navbar"/>
 
 <div>
-<!--    <form action="/posts/edited" th:object="${post}" method="post">-->
-<!--        &lt;!&ndash;        <p>Id: <input type="text" th:field="*{id}" /></p>&ndash;&gt;-->
-<!--        <div>Id: <p th:text="${post.id}"></p></div>-->
-<!--        <input type="hidden" name="id" th:value="${post.id}"/>-->
-<!--        <p>Title: <input type="text" th:field="*{title}"/></p>-->
-<!--        <p>Body: <input type="text" th:field="*{body}"/></p>-->
-<!--        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>-->
-<!--    </form>-->
-<!--    <form action="/posts" method="get">-->
-<!--        <p><input type="submit" value="Home"/></p>-->
-<!--    </form>-->
     <form th:action="@{/posts/edited}" th:method="post" th:object="${post}">
         Id:
         <p th:text="*{id}"></p>
@@ -30,7 +19,7 @@
         <input th:field="*{body}"/>
         <br/>
         Image Link:
-        <input th:field="${images.getPath()}" />
+        <input th:object="${images}" th:field="*{path}" />
         <br/>
         Categories:
         <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
