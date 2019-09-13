@@ -70,7 +70,7 @@ public class PostController {
             Long delId = id;
         imgDao.deleteByPost_Id(delId);
         System.out.println("img del");
-        catDao.deletePostCategoryBy(delId);
+        catDao.deletePostCategoriesByPost_id(delId);
         System.out.println("img cat");
         postDao.delete(delId);
         return "redirect:/posts";
