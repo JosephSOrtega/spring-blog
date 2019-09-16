@@ -7,7 +7,7 @@
 </head>
 <body>
 <nav th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/home">RPG Me</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,31 +19,31 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/posts">Posts</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/posts/create">Create</a>
                 </li>
-                <li sec:authorize="isAuthenticated()">
+                <li class="nav-item active" sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                        <a class="nav-link" style="margin-top: 8px">Logout</a>
                     </form>
                 </li>
-                <li sec:authorize="isAnonymous()">
+                <li class="nav-item active" sec:authorize="isAnonymous()">
                     <form th:action="@{/login}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Login</button>
+                        <a class="nav-link" style="margin-top: 8px">Login</a>
                     </form>
+                </li>
+                <li class="nav-item active" sec:authorize="isAnonymous()">
                     <form th:action="@{/sign-up}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Sign Up</button>
+                        <a class="nav-link" style="margin-top: 8px">Sign Up</a>
                     </form>
                 </li>
             </ul>
         </div>
     </nav>
 </nav>
-
-
 
 
 </body>

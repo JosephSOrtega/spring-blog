@@ -14,7 +14,23 @@ img {
     max-height: 350px;
 }
 
-.container {
+.container div {
     min-width: 90% !important;
     background-color: whitesmoke;
+}
+.mainCon {
+    min-height: 100% !important;
+    height: 2000px;
+    opacity: .8;
+    min-width: 90% !important;
+    background-color: whitesmoke;
+
+}
+.footerCon{
+    background-color: darkorange;
+    max-height: 10%;
+    min-height: 100px;
+}
+.navbar {
+    background-color: darkorange;
 }
