@@ -26,19 +26,13 @@
                     <a class="nav-link" href="/posts/create">Create</a>
                 </li>
                 <li class="nav-item active" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post">
-                        <a class="nav-link" style="margin-top: 8px">Logout</a>
-                    </form>
+                    <a href="/posts/create" th:action="@{/logout}" th:method="post" class="nav-link">Logout</a>
                 </li>
                 <li class="nav-item active" sec:authorize="isAnonymous()">
-                    <form th:action="@{/login}" th:method="post">
-                        <a class="nav-link" style="margin-top: 8px">Login</a>
-                    </form>
+                    <a href="/posts/create" th:action="@{/login}" th:method="post" class="nav-link">Login</a>
                 </li>
                 <li class="nav-item active" sec:authorize="isAnonymous()">
-                    <form th:action="@{/sign-up}" th:method="post">
-                        <a class="nav-link" style="margin-top: 8px">Sign Up</a>
-                    </form>
+                    <a href="/posts/create" th:action="@{/sign-up}" th:method="post" class="nav-link">Sign Up</a>
                 </li>
             </ul>
         </div>

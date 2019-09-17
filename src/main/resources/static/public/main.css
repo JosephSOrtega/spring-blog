@@ -41,8 +41,13 @@ img {
 }
 
 li a {
-    color: black;
+    color: black!important;
 }
+
+li a:hover {
+    color: dimgrey;
+}
+
 
 ul {
     list-style: none;
@@ -73,4 +78,8 @@ ul {
 }
 .indexRow {
     background-color: lightgray !important;
+}
+.btn:hover {
+    background-color: #ffa84d;
+    border: black solid 2px;
 }
