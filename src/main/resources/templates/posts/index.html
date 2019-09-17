@@ -9,9 +9,9 @@
 <body>
 <th:block th:include="/partials/navbar"/>
 <div class="container mainCon">
-    <div class="row">
+    <div class="row justify-content-start">
         <div class="col text-center">
-            <ul>
+            <ul class="justify-content-center">
                 <li th:each="post : ${posts}">
 
                     <!--                    <h2 th:text="${post.title}"></h2>-->
@@ -30,8 +30,8 @@
                     <!--                        <p><input type="submit" value="Show Ad"/></p>-->
                     <!--                    </form>-->
 
-                    <div class="card" style="width: 18rem;">
-                        <img th:each="img : ${images}" th:src="${img.path}" class="card-img-top" alt="..."/>
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img th:each="img : ${images}" th:if="${img.getId() == post.getId()}" th:src="${img.getPath()}" class="card-img-top" alt="..."/>
                         <!--                        <div class="card-body">-->
                         <!--                            <h5 class="card-title" th:text="${post.title}"></h5>-->
                         <!--                            <p class="card-text" th:text="${post.body}"></p>-->

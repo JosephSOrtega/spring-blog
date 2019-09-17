@@ -21,6 +21,7 @@ img {
 }
 
 .mainCon {
+    margin-top: 10%;
     min-height: 100% !important;
     height: 2000px;
     opacity: .8;
@@ -36,6 +37,7 @@ img {
 
 .navbar {
     background-color: darkorange;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 li a {
@@ -44,6 +46,7 @@ li a {
 
 ul {
     list-style: none;
+    padding: 0;
 }
 
 .card-body {
@@ -54,14 +57,19 @@ ul {
 .card {
     border: black 2px solid;
     border-radius: 5px;
+    margin: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 .containerIndex {
     background-color: lightgray !important;
 }
 .btn-primary {
     background-color: darkorange;
-    color: whitesmoke;
-    border: black;
+    color: whitesmoke !important;
+    border: black solid 2px;
+    text-shadow: 2px 2px 2px #000000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .indexRow {
     background-color: lightgray !important;
