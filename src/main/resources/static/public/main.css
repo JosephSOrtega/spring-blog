@@ -1,6 +1,7 @@
-body{
+body {
     background-color: dimgrey;
 }
+
 #carouselExampleInterval {
     height: 33%;
     min-height: 350px;
@@ -18,22 +19,50 @@ img {
     min-width: 90% !important;
     background-color: whitesmoke;
 }
+
 .mainCon {
     min-height: 100% !important;
     height: 2000px;
     opacity: .8;
     min-width: 90% !important;
     background-color: whitesmoke;
-
 }
-.footerCon{
+
+.footerCon {
     background-color: darkorange;
     max-height: 10%;
     min-height: 100px;
 }
+
 .navbar {
     background-color: darkorange;
 }
+
 li a {
     color: black;
+}
+
+ul {
+    list-style: none;
+}
+
+.card-body {
+    background-color: lightgray !important;
+    border: black 2px solid;
+}
+
+.card {
+    border: black 2px solid;
+    border-radius: 5px;
+}
+.containerIndex {
+    background-color: lightgray !important;
+}
+.btn-primary {
+    background-color: darkorange;
+    color: whitesmoke;
+    border: black;
+}
+.indexRow {
+    background-color: lightgray !important;
 }

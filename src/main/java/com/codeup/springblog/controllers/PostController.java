@@ -42,10 +42,13 @@ public class PostController {
     @GetMapping("/posts")
     public String postsAll(Model vmodel) {
         List<Post> posts = null;
+        List<AdImage> images = null;
 
         posts = (List<Post>) postDao.findAll();
+        images = imgDao.findAll();
 
         vmodel.addAttribute("posts", posts);
+        vmodel.addAttribute("images", images);
         return "posts/index";
     }
 
