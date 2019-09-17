@@ -107,6 +107,10 @@ public class PostController {
 //
 //        savedImg.setPath(images);
 //        savedImg.setId(id);
+
+        if (images == null){
+            images = "https://vollrath.com/ClientCss/images/VollrathImages/No_Image_Available.jpg";
+        }
         imgDao.modifyImg(images, id);
         System.out.println("IMG Added");
 
@@ -130,7 +134,13 @@ public class PostController {
         System.out.println(path.getPath());
         vModel.addAttribute("post", postDao.findOne(newId));
         vModel.addAttribute("categories", catDao.findAll());
-        vModel.addAttribute("images", path);
+        String laterPath = null;
+        if (path.getPath().equalsIgnoreCase("https://vollrath.com/ClientCss/images/VollrathImages/No_Image_Available.jpg")){
+            laterPath = "";
+        } else {
+            laterPath = path.getPath();
+        }
+        vModel.addAttribute("images", laterPath);
 
 
         return "posts/edit";
@@ -152,6 +162,9 @@ public class PostController {
             @RequestParam(name = "images") String images,
             @RequestParam(name = "categories") List<PostCategory> categories
     ) {
+        if (images == null){
+            images = "https://vollrath.com/ClientCss/images/VollrathImages/No_Image_Available.jpg";
+        }
 
         Post savedPost = new Post();
         AdImage savedImg = new AdImage();

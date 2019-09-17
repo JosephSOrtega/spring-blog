@@ -19,7 +19,7 @@
         <input th:field="*{body}"/>
         <br/>
         Image Link:
-        <input th:name="images" th:object="${images}" th:field="*{path}" />
+        <input th:name="images" th:field="${images}" />
         <br/>
         Categories:
         <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />

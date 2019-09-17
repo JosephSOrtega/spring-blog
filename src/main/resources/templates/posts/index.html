@@ -9,66 +9,33 @@
 <body>
 <th:block th:include="/partials/navbar"/>
 <div class="container mainCon">
-    <div class="row justify-content-start">
+    <div class="justify-content-start">
         <div class="col text-center">
-            <ul class="justify-content-center">
+            <ul class="justify-content-center row">
                 <li th:each="post : ${posts}">
-
-                    <!--                    <h2 th:text="${post.title}"></h2>-->
-                    <!--                    <p th:text="${post.body}"></p>-->
-                    <!--                    <input type="hidden" name="id" sec:authorize="isAuthenticated()" th:value="${post.id}"/>-->
-                    <!--                    <form action="/posts/editing" method="get">-->
-                    <!--                        <p><input type="submit" value="Edit"/></p>-->
-                    <!--                        <input type="hidden" name="id" th:value="${post.id}"/>-->
-                    <!--                    </form>-->
-                    <!--                    <form action="/posts/delete" sec:authorize="isAuthenticated()" method="post">-->
-                    <!--                        <p><input type="submit" value="Delete"/></p>-->
-                    <!--                        <input type="hidden" name="id" th:value="${post.id}"/>-->
-                    <!--                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
-                    <!--                    </form>-->
-                    <!--                    <form th:action="'/posts/' + ${post.id}" method="get">-->
-                    <!--                        <p><input type="submit" value="Show Ad"/></p>-->
-                    <!--                    </form>-->
-
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img th:each="img : ${images}" th:if="${img.getId() == post.getId()}" th:src="${img.getPath()}" class="card-img-top" alt="..."/>
-                        <!--                        <div class="card-body">-->
-                        <!--                            <h5 class="card-title" th:text="${post.title}"></h5>-->
-                        <!--                            <p class="card-text" th:text="${post.body}"></p>-->
-                        <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
-                        <!--                            <form action="/posts/editing" method="get">-->
-                        <!--                                <a class="btn btn-primary"><input type="submit" value="Edit"/></a>-->
-                        <!--                                <input type="hidden" name="id" th:value="${post.id}"/>-->
-                        <!--                            </form>-->
-                        <!--                            <form action="/posts/delete" sec:authorize="isAuthenticated()" method="post">-->
-                        <!--                                <p class="btn btn-primary"><input type="submit" value="Delete"/></p>-->
-                        <!--                                <input type="hidden" name="id" th:value="${post.id}"/>-->
-                        <!--                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
-                        <!--                            </form>-->
-                        <!--                            <form th:action="'/posts/' + ${post.id}" method="get">-->
-                        <!--                                <p class="btn btn-primary"><input type="submit" value="Show Ad"/></p>-->
-                        <!--                            </form>-->
-
-                        <!--                        </div>-->
+                    <div class="card mx-auto col-md-12 col-lg-6 col-xl-4" style="width: 18rem;">
+                        <img th:each="img : ${images}" th:if="${img.getId() == post.getId()}" th:src="${img.getPath()}"
+                             class="card-img-top" alt="..."/>
                         <div class="card-body">
                             <h5 class="card-title" th:text="${post.title}"></h5>
-                            <hr />
+                            <hr/>
                             <p class="card-text" th:text="${post.body}"></p>
-                            <hr />
+                            <hr/>
                             <div class="containerIndex">
                                 <div class="row indexRow">
                                     <form action="/posts/editing" class="col" method="get">
-                                        <input class="btn btn-primary" type="submit" th:value="Edit" />
+                                        <input class="btn btn-primary" type="submit" th:value="Edit"/>
                                         <input type="hidden" name="id" th:value="${post.id}"/>
                                     </form>
-                                    <form action="/posts/delete" class="col"  sec:authorize="isAuthenticated()" method="post">
+                                    <form action="/posts/delete" class="col" sec:authorize="isAuthenticated()"
+                                          method="post">
                                         <input class="btn btn-primary" type="submit" th:value="Delete"/>
                                         <input type="hidden" name="id" value="${post.id}"/>
                                         <input type="hidden" th:name="${_csrf.parameterName}"
                                                th:value="${_csrf.token}"/>
                                     </form>
                                     <form th:action="'/posts/' + ${post.id}" class="col" method="get">
-                                        <input class="btn btn-primary" type="submit" th:value="Show" />
+                                        <input class="btn btn-primary" type="submit" th:value="Show"/>
                                     </form>
                                 </div>
                             </div>
