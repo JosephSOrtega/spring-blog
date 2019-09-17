@@ -34,3 +34,6 @@ img {
 .navbar {
     background-color: darkorange;
 }
+li a {
+    color: black;
+}
