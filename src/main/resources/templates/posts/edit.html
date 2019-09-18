@@ -8,7 +8,7 @@
 <body>
 <th:block th:include="/partials/navbar"/>
 
-<div>
+<div class="container containerEdit">
     <form th:action="@{/posts/edited}" th:method="post" th:object="${post}">
         Id:<p th:text="*{id}"></p>
         <input type="hidden" name="id" th:value="${post.id}"/>

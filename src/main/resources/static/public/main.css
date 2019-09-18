@@ -33,6 +33,7 @@ img {
     background-color: darkorange;
     max-height: 10%;
     min-height: 100px;
+    width: 100%;
 }
 
 .navbar {
@@ -41,7 +42,7 @@ img {
 }
 
 li a {
-    color: black!important;
+    color: black !important;
 }
 
 li a:hover {
@@ -62,16 +63,17 @@ ul {
 .card {
     border: black 2px solid;
     border-radius: 5px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 0;
     width: 90%;
 
 }
+
 .containerIndex {
     background-color: lightgray !important;
 }
+
 .btn-primary {
     background-color: darkorange;
     color: whitesmoke !important;
@@ -79,13 +81,16 @@ ul {
     text-shadow: 2px 2px 2px #000000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .indexRow {
     background-color: lightgray !important;
 }
+
 .btn:hover {
     background-color: #ffa84d;
     border: black solid 2px;
 }
+
 /*.footer {*/
 /*    position: relative;*/
 /*    margin-top: -150px; !* negative value of footer height *!*/
@@ -93,3 +98,11 @@ ul {
 /*    clear: both;*/
 /*    padding-top: 20px;*/
 /*}*/
+.card-img-top {
+    height: 20rem!important;
+    min-height: 10rem;
+}
+.containerEdit {
+    background-color: whitesmoke;
+    height: 100%;
+}
