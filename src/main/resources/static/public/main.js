@@ -1,6 +1,8 @@
 "use strict";
 (function () {
 ///////////////////////Fade in/Out Navbar
+
+
     var opac;
     // Keeps breaking
     function fadeInEffect() {

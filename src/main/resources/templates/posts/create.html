@@ -33,6 +33,9 @@
         <br/>
         Image Link:
         <input th:field="*{images}" />
+        <button type="button" id="open">Open Picker</button>
+
+
         <br/>
         Categories:
         <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
@@ -46,9 +49,28 @@
 </div>
 
 <script>
+
+    const options = {
+
+        displayMode: 'inline',
+
+        container: '#inline',
+
+    };
+
+    const openBtn = document.getElementById('open');
+
     console.log(50);
     const client = filestack.init(FSKey);
-    client.picker().open();
+
+    openBtn.addEventListener("click", function () {
+        client.picker().open();
+    });
+
+
+
+
+
 </script>
 
 <th:block th:replace="/partials/footer"/>
