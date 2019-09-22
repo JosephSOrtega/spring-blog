@@ -1,5 +1,5 @@
 HELP.md
-src/main/resources/static/public/keys.js
+keys.js
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -31,6 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
 
 
 
