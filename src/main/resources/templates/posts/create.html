@@ -32,13 +32,17 @@
         <input th:field="*{body}"/>
         <br/>
         Image Link:
-        <input th:field="*{images}" />
-        <button type="button" id="open">Open Picker</button>
+<!--        <input th:field="*{images}"/>-->
+            <label for="fileupload">Select a file to upload</label>
+            <input th:field="*{images}" type="file" id="fileupload"/>
+<!--            <button type="button" id="open">Open Picker</button>-->
+
 
 
         <br/>
         Categories:
-        <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" />
+        <input th:type="checkbox" th:field="*{categories}" th:each="category : ${categories}"
+               th:text="${category.getName()}" th:value="${category.getId()}"/>
 
         <input type="submit"/>
     </form>
@@ -49,26 +53,24 @@
 </div>
 
 <script>
-
-    const options = {
-
-        displayMode: 'inline',
-
-        container: '#inline',
-
-    };
-
+    let img;
     const openBtn = document.getElementById('open');
+    const options = {
+        onUploadDone: file => {
+            console.log(img);
+
+        }
+    };
 
     console.log(50);
     const client = filestack.init(FSKey);
 
     openBtn.addEventListener("click", function () {
-        client.picker().open();
+        client.picker(options).open().then(     function () {
+            img = file.url;
+        })
+
     });
-
-
-
 
 
 </script>
