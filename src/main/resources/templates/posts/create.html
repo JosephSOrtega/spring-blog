@@ -4,10 +4,13 @@
     <meta charset="UTF-8"/>
     <title>Home</title>
     <th:block th:include="/partials/header"/>
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+
 </head>
 <body>
 <th:block th:include="/partials/navbar"/>
-
+<br/>
+<br/>
 <div>
     <!--    <form th:action="@{'/posts/' + ${} +'create" method="post">-->
     <!--    <form th:action="@{/posts/create}" th:method="post">-->
@@ -43,7 +46,8 @@
 </div>
 
 <script>
-    var client = filestack.init(YOUR_API_KEY);
+    console.log(50);
+    const client = filestack.init(FSKey);
     client.picker().open();
 </script>
 

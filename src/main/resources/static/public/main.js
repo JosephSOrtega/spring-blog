@@ -1,11 +1,7 @@
 "use strict";
-
-
 (function () {
 ///////////////////////Fade in/Out Navbar
     var opac;
-
-
     // Keeps breaking
     function fadeInEffect() {
         $('.navbar').animate({
@@ -66,6 +62,7 @@
             // console.log("docheight: " + docHeight + "\n" + "footerheight: " + footerHeight + "\n" + "footertop: " + footerTop + "\n" + "new docheight: " + $(window).height() + "\n" + "margintop: " + marginTop);
         }, 250);
     });
+
 
 
 })();
