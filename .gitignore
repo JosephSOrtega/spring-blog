@@ -1,5 +1,5 @@
 HELP.md
-/Users/justinsortega/IdeaProjects/springblog/src/main/resources/static/public/keys.js
+src/main/resources/static/public/keys.js
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
